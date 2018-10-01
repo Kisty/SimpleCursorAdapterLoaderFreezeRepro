@@ -13,6 +13,9 @@ public interface UserDao {
     @Query("SELECT * FROM user")
     Cursor getAll();
 
+    @Query("SELECT count(*) FROM user")
+    int getCount();
+
     @Insert
-    void insertAll(User... users);
+    void insertAll(List<User> users);
 }

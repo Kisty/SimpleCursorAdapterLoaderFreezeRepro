@@ -44,20 +44,14 @@ public class MainActivity extends AppCompatActivity {
             public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
                 adapter.changeCursor(data);
 
-//                try {
-//                    //Used to simulate preference access
-//                    Thread.sleep(200);
-//                } catch (InterruptedException e) {
-//                    Log.e("MainActivity", "Couldn't wait", e);
-//                }
-                List<String> findNames = Arrays.asList("Alice", "Bob", "Edmund");
-                //In real app, search through the list to restore selected items
+                //In real app, search through the list to restore user's last selected items
+                List<String> findNames = Arrays.asList("Alice", "Bob", "Edmund", "Charlie");
                 if (data != null) {
                     while (data.moveToNext()) {
                         String firstName = data.getString(data.getColumnIndex("first_name"));
                         for (String findName : findNames) {
                             if (findName.equals(firstName)) {
-                                Toast.makeText(MainActivity.this, "Matched " + firstName, Toast.LENGTH_SHORT).show();
+                                Log.d("MAIN", "Found " + firstName);
                                 listView.setItemChecked(listView.getHeaderViewsCount() + data.getPosition(), true);
                             }
                         }
